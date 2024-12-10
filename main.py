@@ -32,12 +32,12 @@ class Bot(commands.Bot):
         if message.echo:
             return
 
-        if message.channel not in self.log_files:
-            file_path = os.path.join(self.data_dir, f"{self.init_time}__{message.channel}.txt")
-            self.log_files[message.channel] = open(file_path, "w", encoding="utf-8")
+        if message.channel.name not in self.log_files:
+            file_path = os.path.join(self.data_dir, f"{self.init_time}__{message.channel.name}.txt")
+            self.log_files[message.channel.name] = open(file_path, "w", encoding="utf-8")
 
-        self.log_files[message.channel].write(message.raw_data)
-        print(f"#{message.channel}:\t{message.author}\t{message.content}")
+        self.log_files[message.channel.name].write(message.raw_data + "\n")
+        print(f"#{message.channel.name}:\t{message.author.name}\t\t{message.content}")
 
 
 if __name__ == '__main__':
